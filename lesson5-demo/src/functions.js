@@ -10,7 +10,7 @@ calculateSum();
 console.log(`The sum of ${a} and ${b} is: ${sum}`);
 
 
-function multiply(x, y) {
+export function multiply(x, y) {
     return x * y;
 }
 const product = multiply(a, sum);
