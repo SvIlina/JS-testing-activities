@@ -1,19 +1,20 @@
 async function getUsers() {
-  try {
-    const response = await fetch("https://jsonplaceholder.typicode.com/users");
-    const data = await response.json();
+    let data = [];
+    try {
+        const response = await fetch('https://jsonplaceholder.typicode.com/users');
+        data = await response.json();
 
-    displayUsers(data);
-  } 
-  catch (error) {
-    console.log("Error:", error);
-  }
+    } catch (error) {
+        console.log('Error:', error);
+    }
+    return data;
 }
 
-function displayUsers(users) {
-  users.forEach(user => {
-    console.log(user.name);
-  });
+async function processUsers() {
+    const users = await getUsers();
+    users.forEach(user => {
+        console.log(user.name);
+    });
 }
 
-console.log(getUsers());
+console.log(await processUsers());
