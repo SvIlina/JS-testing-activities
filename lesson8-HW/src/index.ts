@@ -1,13 +1,15 @@
-import { IFavoriteMovies } from './favorite-Movies.dto';
+import { IAphia } from './aphia.dto';
 
-async function getData(): Promise<IFavoriteMovies[]> {
-    const options = {method: 'GET', headers: {accept: 'application/json'}};
-    const resp = await fetch('https://api.themoviedb.org/3/account/null/favorite/movies?language=en-US&page=1&sort_by=created_at.asc', options);
+async function getData(): Promise<IAphia[]> {
+    const resp = await fetch('https://www.marinespecies.org/rest/AphiaAttributeKeysByID/0?include_children=true');
     const data = await resp.json();
     return data;
 }
 
 (async () => {
-    const favoriteMovies = await getData();
-    console.log(favoriteMovies);
+    const aphiaData = await getData();
+    console.log(aphiaData);
 })();
+
+function species (): undefined {
+}
