@@ -1,4 +1,4 @@
-interface IFavoriteMovies {
+export interface IFavoriteMovies {
     original_title: string;
     adult: boolean;
     release_date: string;
@@ -7,5 +7,4 @@ interface IFavoriteMovies {
     overview: string;
 }
 
-const data = fetch('https://api.themoviedb.org/3/account/{account_id}/favorite/movies');
 
