@@ -1,8 +1,6 @@
 export interface IAphia {
     measurementTypeID: number;
-    measurementType: string,
-    CategoryID: number,
-    children: object[]
+    measurementType: string;
+    CategoryID: number;
+    children: IAphia[]
 }
-
-
