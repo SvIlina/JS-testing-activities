@@ -1,5 +1,7 @@
+import { AirLines } from './abstraction';
 import { IAphia } from './aphia.dto';
 import { IOrchid } from './orchid.dto';
+import { Ryanair } from './ryanair';
 
 async function getData(): Promise<IAphia[]> {
     const resp = await fetch('https://www.marinespecies.org/rest/AphiaAttributeKeysByID/0?include_children=true');
@@ -33,3 +35,14 @@ class Orchid implements IOrchid{
     public measurementType: string;
     public children: object[];
 }
+
+const ryanair = new Ryanair('Ryanair', 60, 'Paris-London');
+
+function displayFlightInfo(airline: AirLines): void {
+    airline.getCivilian();
+    airline.getDistance();
+    console.log(`Airline: ${airline.name} that flies the route ${airline.route} has a ticket price of ${airline.ticketPrice()} euro and a flight duration ${airline.flightDuration()} hours.`);
+}
+displayFlightInfo(ryanair);
+console.log(ryanair.luggageAllowed());
+

@@ -1,11 +1,18 @@
 export abstract class AirLines {
-    protected name: string;
-    protected passangerQuantity: number;
-    protected civilian: boolean;
+    protected abstract civilian: boolean;
+    protected abstract distance_km: number;
 
-    public constructor(name: string, passangerQuantity: number, civilian: boolean) {
+    public constructor(public name: string, public passengerQuantity: number, public route: string) {
         this.name = name;
-        this.passangerQuantity = passangerQuantity;
-        this.civilian = civilian;
+        this.passengerQuantity = passengerQuantity;
+        this.route = route;
     }
+    public getCivilian(): boolean {
+        return this.civilian;
+    }
+    public getDistance(): number {
+        return this.distance_km;
+    }
+    public abstract ticketPrice(): number;
+    public abstract flightDuration(): number;
 }
