@@ -9,10 +9,9 @@ async function getData(): Promise<IAphia[]> {
     return data;
 }
 
-async function filterData (): Promise<undefined> {
+async function filterData(): Promise<void> {
     const aphiaData = await getData();
-    const filteredAphia = aphiaData.filter((aphia) => aphia.children.length > 3
-    );
+    const filteredAphia = aphiaData.filter((aphia) => aphia.children.length > 3);
     if (filteredAphia.length > 0) {
         const orchid = new Orchid(filteredAphia[0]);
         console.log(orchid);
@@ -24,8 +23,7 @@ async function filterData (): Promise<undefined> {
     await filterData();
 })();
 
-
-class Orchid implements IOrchid{
+class Orchid implements IOrchid {
     public constructor(aphia: IAphia) {
         this.measurementTypeID = aphia.measurementTypeID;
         this.measurementType = aphia.measurementType;
@@ -41,8 +39,9 @@ const ryanair = new Ryanair('Ryanair', 60, 'Paris-London');
 function displayFlightInfo(airline: AirLines): void {
     airline.getCivilian();
     airline.getDistance();
-    console.log(`Airline: ${airline.name} that flies the route ${airline.route} has a ticket price of ${airline.ticketPrice()} euro and a flight duration ${airline.flightDuration()} hours.`);
+    console.log(
+        `Airline: ${airline.name} that flies the route ${airline.route} has a ticket price of ${airline.ticketPrice()} euro and a flight duration ${airline.flightDuration()} hours.`
+    );
 }
 displayFlightInfo(ryanair);
 console.log(ryanair.luggageAllowed());
-
