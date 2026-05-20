@@ -6,6 +6,7 @@ export class Car implements ICarBodyStyle {
     public carYear: number;
     public bodyStyle: string;
     public doors: number;
+    private vin: string;
 
     public constructor(carBrand: string, carModel: string, carYear: number, bodyStyle: string, doors: number) {
         this.carBrand = carBrand;
@@ -13,9 +14,14 @@ export class Car implements ICarBodyStyle {
         this.carYear = carYear;
         this.bodyStyle = bodyStyle;
         this.doors = doors;
+        this.vin = '';
     }
 
     public getCarBodyStyleInfo(): void {
         console.log(`This car is a ${this.bodyStyle} with ${this.doors} doors.`);
+    }
+
+    protected setVin(vin: string): void {
+        this.vin = vin;
     }
 }

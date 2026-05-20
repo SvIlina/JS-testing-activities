@@ -15,6 +15,10 @@ export class PoliceCar extends Car implements IPoliceCar {
     public switchSiren(): void {
         console.log('Wigugigigigigigigigigigigigigigigigig');
     }
+
+    public setPoliceCarVin(vin: string): void {
+        this.setVin(vin);
+    }
 }
 
 interface IPoliceCar {
