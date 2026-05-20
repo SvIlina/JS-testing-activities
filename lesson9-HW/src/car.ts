@@ -4,9 +4,9 @@ export class Car implements ICarBodyStyle {
     public carBrand: string;
     public carModel: string;
     public carYear: number;
+    private vin: string;
     public bodyStyle: string;
     public doors: number;
-    private vin: string;
 
     public constructor(carBrand: string, carModel: string, carYear: number, bodyStyle: string, doors: number) {
         this.carBrand = carBrand;
