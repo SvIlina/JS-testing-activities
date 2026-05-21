@@ -21,6 +21,7 @@ export class PoliceCar extends Car implements IPoliceCar {
     }
 }
 
+//Abstract interface for police car
 interface IPoliceCar {
     cage: boolean;
     siren: boolean;
