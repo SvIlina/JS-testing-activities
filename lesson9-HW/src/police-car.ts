@@ -5,8 +5,8 @@ export class PoliceCar extends Car implements IPoliceCar {
     public siren: boolean;
     public radio: boolean;
 
-    public constructor(carBrand: string, carModel: string, carYear: number, bodyStyle: string, doors: number, cage: boolean, siren: boolean, radio: boolean) {
-        super(carBrand, carModel, carYear, bodyStyle, doors);
+    public constructor(carBrand: string, carModel: string, carYear: number, bodyStyle: string, doors: number, vin: string, cage: boolean, siren: boolean, radio: boolean) {
+        super(carBrand, carModel, carYear, bodyStyle, doors, vin);
         this.cage = cage;
         this.siren = siren;
         this.radio = radio;
@@ -16,9 +16,6 @@ export class PoliceCar extends Car implements IPoliceCar {
         console.log('Wigugigigigigigigigigigigigigigigigig');
     }
 
-    public setPoliceCarVin(vin: string): void {
-        this.setVin(vin);
-    }
 }
 
 //Abstract interface for police car

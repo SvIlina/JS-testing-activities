@@ -3,12 +3,13 @@ import { Car } from './car';
 export class CarParking {
     public parkingFee: number;
     private penaltyFee: number;
-    private isParkingPaid: boolean;
+    private parkingPaymentMap: Map<string, boolean>;
 
     private _cars: Car[] = [];
 
     public addCar(car: Car): void {
         this._cars.push(car);
+        this.parkingPaymentMap.set(car.getVin(), false);
     }
 
     public get cars(): Car[] {
@@ -16,17 +17,46 @@ export class CarParking {
     }
 
     public constructor(parkingFee: number) {
-        this.isParkingPaid = false;
+        this.parkingPaymentMap = new Map<string, boolean>();
         this.parkingFee = parkingFee;
         this.penaltyFee = parkingFee * 2;
     }
 
-    public parkingPaid(): void {
-        if (this.isParkingPaid === true) {
+    public isParkingPaid(car: Car): void {
+        if (this.parkingPaymentMap.get(car.getVin())) {
             console.log('Parking is paid.');
         } else {
-            this.penaltyFee;
-            this.parkingPaid();
+            console.log('Parking is not paid.');
         }
+    }
+
+    public pay(vin: string, coinsPaid: number): void {
+        if (!this.isCarInParkingLot(vin)) {
+            return;
+        }
+        if (coinsPaid === this.parkingFee) {
+            console.log('Parking fee paid.');
+            this.parkingPaymentMap.set(vin, true);
+        } else {
+            console.log('Invalid payment amount.');
+            this.pay(vin, coinsPaid + 1);
+        }
+    }
+    public removeCar(vin: string): void {
+        if (!this.isCarInParkingLot(vin) || !this.parkingPaymentMap.get(vin)) {
+            return;
+        }
+        if (this.parkingPaymentMap.has(vin) && this.parkingPaymentMap.get(vin)) {
+            this.parkingPaymentMap.delete(vin);
+            this._cars = this._cars.filter(car => car.getVin() !== vin);
+            console.log('Car removed from parking lot.');
+        }
+    }
+    private isCarInParkingLot(vin: string): boolean {
+        const isCarPresent = this.parkingPaymentMap.has(vin);
+        if (!isCarPresent) {
+            console.log('Car not found in parking lot.');
+        }
+        return isCarPresent;
     }
 }
