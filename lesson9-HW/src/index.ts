@@ -2,10 +2,27 @@ import { Car } from './car';
 import { CarParking } from './car-parking';
 import { PoliceCar } from './police-car';
 
-const toyotaCamry = new Car('Toyota', 'Camry', 2020, 'sedan', 4, 'VIN123456789');
+const toyotaCamry = new Car({
+    carBrand: 'Toyota',
+    carModel: 'Camry',
+    carYear: 2020,
+    bodyStyle: 'sedan',
+    doors: 4,
+    vin: 'VIN123456789'
+});
 toyotaCamry.getCarBodyStyleInfo();
 
-const policeCar = new PoliceCar('Ford', 'Focus', 2021, 'coupe', 2, 'VIN987654321', true, true, true);
+const policeCar = new PoliceCar({
+    carBrand: 'Ford',
+    carModel: 'Focus',
+    carYear: 2021,
+    bodyStyle: 'coupe',
+    doors: 2,
+    vin: 'VIN987654321',
+    cage: true,
+    siren: true,
+    radio: true
+});
 if (policeCar.siren === true) {
     policeCar.switchSiren();
 }

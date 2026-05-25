@@ -30,16 +30,17 @@ export class CarParking {
         }
     }
 
-    public pay(vin: string, coinsPaid: number): void {
+    public pay(vin: string, coinsPaid: number): boolean | undefined {
         if (!this.isCarInParkingLot(vin)) {
-            return;
+            return false;
         }
         if (coinsPaid === this.parkingFee) {
             console.log('Parking fee paid.');
             this.parkingPaymentMap.set(vin, true);
+            return this.parkingPaymentMap.get(vin);
         } else {
             console.log('Invalid payment amount.');
-            this.pay(vin, coinsPaid + 1);
+            return this.pay(vin, coinsPaid + 1);
         }
     }
     public removeCar(vin: string): void {
