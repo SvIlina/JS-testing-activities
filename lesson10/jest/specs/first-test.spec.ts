@@ -1,4 +1,4 @@
-// import { expect as expectChai } from 'chai';
+import { expect as expectChai } from 'chai';
 
 describe('First test', () => {
     beforeAll(() => {
@@ -25,9 +25,9 @@ describe('First test', () => {
         expect(false).toBe(false);
     });
 
-    // describe('Nested describe', () => {
-    //     test('example with chai assertion library', () => {
-    //         expectChai(true).to.be.true;
-    //     });
-    // });
+    describe('Nested describe', () => {
+        test('example with chai assertion library', () => {
+            expectChai(true).to.be.true;
+        });
+    });
 });
