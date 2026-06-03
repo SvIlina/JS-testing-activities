@@ -1,6 +1,8 @@
+import { describe, it } from 'mocha';
 import { expect } from 'chai';
 
-describe('sum', () => {    it ('4 + 6 = 10', () => {        
-    expect(4 + 6).to.be.equal(10);    
-});
+describe('sum', () => {
+    it('4 + 6 = 10', () => {
+        expect(4 + 6).to.be.equal(10);
+    });
 });
