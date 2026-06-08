@@ -13,6 +13,10 @@ describe('CarParking', () => {
     let parkingLot;
     let car;
 
+    afterEach(function() {
+        parkingLot.resetPaymentStatus(car.getVin());
+    });
+
     before(function() {
         parkingLot = new CarParking(10);
         car = new Car({
@@ -28,26 +32,30 @@ describe('CarParking', () => {
     it('Must return false for unpaid parking', () => {
         expect(parkingLot.isParkingPaid(car)).to.be.false;
     });
+
     it('Must return true for paid parking', () => {
         parkingLot.pay(car.getVin(), 10);
         expect(parkingLot.isParkingPaid(car)).to.be.true;
-        parkingLot.resetPaymentStatus(car.getVin());
     });
+
     it('Must return false for invalid VIN payment', () => {
         expect(parkingLot.pay('VIN000000000', 10)).to.be.false;
     });
+
     it('Must return true for valid VIN payment', () => {
         expect(parkingLot.pay(car.getVin(), 10)).to.be.true;
-        parkingLot.resetPaymentStatus(car.getVin());
     });
+
     it('Must return false when trying to remove car from parking lot when payment is not made', () => {
         expect(parkingLot.removeCar(car.getVin())).to.be.false;
         expect(parkingLot.cars.length).to.be.equal(1);
     });
+
     it('Must return false when trying to remove car from parking lot with invalid VIN', () => {
         expect(parkingLot.removeCar('VIN000000000')).to.be.false;
         expect(parkingLot.cars.length).to.be.equal(1);
     });
+
     it('Must return true when trying to remove car from parking lot with valid VIN and payment made', () => {
         parkingLot.pay(car.getVin(), 10);
         expect(parkingLot.removeCar(car.getVin())).to.be.true;
