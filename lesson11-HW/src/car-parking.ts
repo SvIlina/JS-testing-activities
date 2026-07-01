@@ -34,7 +34,7 @@ export class CarParking {
         if (!this.isCarInParkingLot(vin)) {
             return false;
         }
-        if (coinsPaid === this.parkingFee) {
+        if (coinsPaid >= this.parkingFee) {
             console.log('Parking fee paid.');
             this.parkingPaymentMap.set(vin, true);
             return this.parkingPaymentMap.get(vin);
