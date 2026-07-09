@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-empty-function */
 import { beforeAll, describe, expect, it, vi } from 'vitest';
 import { Car } from '../src/car';
 import { CarParking } from '../src/car-parking';
@@ -9,6 +10,7 @@ describe('CarParking', () => {
         carMock = {
             getVin: vi.fn().mockReturnValue('VIN123')
         } as unknown as Car;
+        vi.spyOn(console, 'log').mockImplementation(() => {});
 
         parkingLot = new CarParking(10);
         parkingLot.addCar(carMock);
@@ -22,4 +24,5 @@ describe('CarParking', () => {
         parkingLot.pay(carMock.getVin(), 11);
         expect(parkingLot.isParkingPaid(carMock)).toBe('Parking is paid.');
     });
+
 });
