@@ -1,0 +1,411 @@
+{
+  "info": {
+    "_postman_id": "174f4654-d21c-42d7-9fd5-d14432114fed",
+    "name": "TheDocsAPI_V3",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "32986971"
+  },
+  "item": [
+    {
+      "name": "create pet",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test(\"Status code is 200\", function () {\r",
+              "    pm.response.to.have.status(201);\r",
+              "    pm.collectionVariables.set(\"petId\", pm.response.json().id);\r",
+              "});"
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
+          }
+        }
+      ],
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "formdata",
+          "formdata": [
+            {
+              "key": "name",
+              "value": "R_D pet",
+              "type": "text",
+              "uuid": "30ae36b1-5564-4089-b333-76cad9f4ce03"
+            },
+            {
+              "key": "breed_id",
+              "value": "1",
+              "type": "text",
+              "uuid": "742c97f9-2fd1-42cd-b5c8-ebaba2846bfb"
+            },
+            {
+              "key": "date_of_birth",
+              "value": "2026-06-08",
+              "type": "text",
+              "uuid": "547fb14c-34d1-4d67-a1e8-f557b1f5a71e"
+            },
+            {
+              "key": "sub_id",
+              "value": "ViLe",
+              "type": "text",
+              "uuid": "5c4296eb-23f6-4170-8784-aea3c41e1a5d"
+            },
+            {
+              "key": "description",
+              "value": "This is out pet created at the lesson",
+              "type": "text",
+              "uuid": "0b53201b-4330-429c-bfea-a869da28967b"
+            }
+          ]
+        },
+        "url": {
+          "raw": "https://api.thedogapi.com/v1/pets",
+          "protocol": "https",
+          "host": [
+            "api",
+            "thedogapi",
+            "com"
+          ],
+          "path": [
+            "v1",
+            "pets"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "get our pet",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "https://api.thedogapi.com/v1/pets/{{petId}}",
+          "protocol": "https",
+          "host": [
+            "api",
+            "thedogapi",
+            "com"
+          ],
+          "path": [
+            "v1",
+            "pets",
+            "{{petId}}"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "upload images",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test(\"Status code is 200\", function () {\r",
+              "    pm.response.to.have.status(201);\r",
+              "\r",
+              "    const ids = pm.response.json().map(image => image.id);\r",
+              "    pm.expect(ids.length).to.be.greaterThan(0);\r",
+              "\r",
+              "    pm.collectionVariables.set(\"imagesIds\", ids.join(\",\"));\r",
+              "});"
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
+          }
+        }
+      ],
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "formdata",
+          "formdata": [
+            {
+              "key": "images",
+              "type": "file",
+              "uuid": "43448c78-9f39-43c5-95ce-60d3eaafc00f",
+              "src": "/C:/Users/vlevkoniuk/Downloads/the_dog_1.jpg"
+            },
+            {
+              "key": "images",
+              "type": "file",
+              "uuid": "35baacc4-e486-47a0-8ba2-195001959ac1",
+              "src": "/C:/Users/vlevkoniuk/Downloads/the_dog_2.jpg"
+            }
+          ]
+        },
+        "url": {
+          "raw": "https://api.thedogapi.com/v1/pets/{{petId}}/images",
+          "protocol": "https",
+          "host": [
+            "api",
+            "thedogapi",
+            "com"
+          ],
+          "path": [
+            "v1",
+            "pets",
+            "{{petId}}",
+            "images"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "get image by ID..",
+      "event": [
+        {
+          "listen": "prerequest",
+          "script": {
+            "exec": [
+              "const ids = pm.collectionVariables.get(\"imagesIds\").split(',');\r",
+              "pm.collectionVariables.set(\"imageId\", ids[Math.floor(Math.random() * ids.length)]);\r",
+              ""
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
+          }
+        }
+      ],
+      "protocolProfileBehavior": {
+        "disableBodyPruning": true
+      },
+      "request": {
+        "method": "GET",
+        "header": [],
+        "body": {
+          "mode": "formdata",
+          "formdata": [
+            {
+              "key": "images",
+              "type": "file",
+              "uuid": "43448c78-9f39-43c5-95ce-60d3eaafc00f",
+              "src": "/C:/Users/vlevkoniuk/Downloads/the_dog_1.jpg"
+            },
+            {
+              "key": "images",
+              "type": "file",
+              "uuid": "35baacc4-e486-47a0-8ba2-195001959ac1",
+              "src": "/C:/Users/vlevkoniuk/Downloads/the_dog_2.jpg"
+            }
+          ]
+        },
+        "url": {
+          "raw": "https://api.thedogapi.com/v1/images/{{imageId}}",
+          "protocol": "https",
+          "host": [
+            "api",
+            "thedogapi",
+            "com"
+          ],
+          "path": [
+            "v1",
+            "images",
+            "{{imageId}}"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "add to  favorite",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"image_id\": \"{{imageId}}\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "https://api.thedogapi.com/v1/favourites",
+          "protocol": "https",
+          "host": [
+            "api",
+            "thedogapi",
+            "com"
+          ],
+          "path": [
+            "v1",
+            "favourites"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "vote for image",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"image_id\": \"{{imageId}}\",\r\n    \"value\": 10\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "https://api.thedogapi.com/v1/votes",
+          "protocol": "https",
+          "host": [
+            "api",
+            "thedogapi",
+            "com"
+          ],
+          "path": [
+            "v1",
+            "votes"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "get favourite by ID",
+      "event": [
+        {
+          "listen": "prerequest",
+          "script": {
+            "exec": [
+              "const ids = pm.collectionVariables.get(\"imagesIds\").split(',');\r",
+              "pm.collectionVariables.set(\"imageId\", ids[Math.floor(Math.random() * ids.length)]);\r",
+              ""
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
+          }
+        }
+      ],
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "https://api.thedogapi.com/v1/favourites/55548",
+          "protocol": "https",
+          "host": [
+            "api",
+            "thedogapi",
+            "com"
+          ],
+          "path": [
+            "v1",
+            "favourites",
+            "55548"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "add breed",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\"breed_id\": 10}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "https://api.thedogapi.com/v1/images/{{imageId}}/breeds",
+          "protocol": "https",
+          "host": [
+            "api",
+            "thedogapi",
+            "com"
+          ],
+          "path": [
+            "v1",
+            "images",
+            "{{imageId}}",
+            "breeds"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "breeds",
+      "request": {
+        "method": "GET",
+        "header": []
+      },
+      "response": []
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "value",
+        "value": "live_3XjO9hVo5IZl0vspCpkL8ZNmZNicUCvqI1bk6v4ipzCXjMaRmj2sSFNEQ2s4oeqK",
+        "type": "string"
+      },
+      {
+        "key": "key",
+        "value": "x-api-key",
+        "type": "string"
+      }
+    ]
+  },
+  "event": [
+    {
+      "listen": "prerequest",
+      "script": {
+        "type": "text/javascript",
+        "packages": {},
+        "requests": {},
+        "exec": [
+          ""
+        ]
+      }
+    },
+    {
+      "listen": "test",
+      "script": {
+        "type": "text/javascript",
+        "packages": {},
+        "requests": {},
+        "exec": [
+          ""
+        ]
+      }
+    }
+  ],
+  "variable": [
+    {
+      "key": "petId",
+      "value": ""
+    },
+    {
+      "key": "imageId",
+      "value": ""
+    },
+    {
+      "key": "imagesIds",
+      "value": ""
+    }
+  ]
+}
