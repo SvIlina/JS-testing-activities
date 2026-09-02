@@ -1,0 +1,5 @@
+{
+    "theDogApi": {
+        "baseUrl": "https://api.thedogapi.com/v1"
+    }
+}
